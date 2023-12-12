@@ -45,3 +45,12 @@ type FlatArray = Flatten<NestedArray>;
 const flat: FlatArray = [1, 2, 3];
 
 export {};
+
+// FunctionProperties
+type FunctionProperties<T> = {
+  [K in keyof T as T[K] extends Function ? K : never]: T[K];
+};
+
+// Usage (should initially fail)
+type ClassMethods = FunctionProperties<MyClass>; // This should now work correctly
+const methods: ClassMethods = { myMethod: (x: number) => "test" };
