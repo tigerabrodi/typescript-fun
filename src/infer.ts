@@ -37,4 +37,12 @@ async function fetchData() {
 type FetchedDataType = PromiseValueType<ReturnType<typeof fetchData>>;
 const fetchedData: FetchedDataType = await fetchData();
 
+// Flatten
+type Flatten<T> = T extends Array<infer U> ? U : never;
+
+// Usage (should initially fail)
+type NestedArray = number[][];
+type FlatArray = Flatten<NestedArray>; // Fix this type
+const flat: FlatArray = [1, 2, 3];
+
 export {};
