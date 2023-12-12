@@ -66,3 +66,19 @@ function exampleFunction(a: number, b: string, c: boolean): void {}
 
 type ExampleFunctionArguments = ArgumentsToTuple<typeof exampleFunction>;
 const argsTuple: ExampleFunctionArguments = [1, "test", true];
+
+type NestedPropertyType<T, P extends Array<any>> = P extends [
+  infer K,
+  ...infer Rest
+]
+  ? K extends keyof T
+    ? NestedPropertyType<T[K], Rest>
+    : T
+  : T;
+
+// Usage
+type ExampleType = { a: { b: { c: number } } };
+type Path = ["a", "b", "c"];
+
+type ResultType = NestedPropertyType<ExampleType, Path>; // Result: number
+const result: ResultType = 22;
