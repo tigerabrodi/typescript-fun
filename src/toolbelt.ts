@@ -46,5 +46,6 @@ type TestIncludes = Includes<"hello world", "world">; // Result: true
 type TestUpperCase = UpperCase<"typescript">; // Result: 'TYPESCRIPT'
 
 type TestLowerCase = LowerCase<"TYPESCRIPT">; // Result: 'typescript'
+
 // type TestStartsWith = StartsWith<'hello world', 'hello'>;
 // type TestEndsWith = EndsWith<'hello world', 'world'>;
