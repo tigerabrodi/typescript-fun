@@ -51,6 +51,10 @@ type FunctionProperties<T> = {
   [K in keyof T as T[K] extends Function ? K : never]: T[K];
 };
 
-// Usage (should initially fail)
-type ClassMethods = FunctionProperties<MyClass>; // This should now work correctly
-const methods: ClassMethods = { myMethod: (x: number) => "test" };
+const myObjectWithPropsAndMethods = {
+  myProp: "test",
+  myMethod: (x: number) => "test",
+};
+
+type ClassMethods = FunctionProperties<typeof myObjectWithPropsAndMethods>;
+const methods: ClassMethods = { myMethod: (x: number) => "test" }; // Result: { myMethod: (x: number) => string }
