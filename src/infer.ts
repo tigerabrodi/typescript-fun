@@ -25,3 +25,16 @@ function add(a: number, b: number) {
 
 type AddFunctionParams = ParametersType<typeof add>;
 const params: AddFunctionParams = [1, 2];
+
+// Promise value of a promise
+type PromiseValueType<T> = T extends Promise<infer U> ? Awaited<U> : never;
+
+// Usage (should initially fail)
+async function fetchData() {
+  return "Data";
+}
+
+type FetchedDataType = PromiseValueType<ReturnType<typeof fetchData>>;
+const fetchedData: FetchedDataType = await fetchData();
+
+export {};
