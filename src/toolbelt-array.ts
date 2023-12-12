@@ -18,9 +18,9 @@ type IncludesArr<T extends any[], U> = T extends [infer First, ...infer Rest]
 
 type Flatten<T extends any[]> = T extends [infer First, ...infer Rest]
   ? First extends any[]
-    ? Flatten<[...First, ...Rest]>
-    : Flatten<[First, ...Rest]>
-  : T;
+    ? [...Flatten<First>, ...Flatten<Rest>]
+    : [First, ...Flatten<Rest>]
+  : [];
 
 // Example usages
 type TestAppend = Append<[1, 2, 3], 4>; // Result: [1, 2, 3, 4]
