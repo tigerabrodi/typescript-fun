@@ -5,10 +5,23 @@ type Split<
   ? [FirstPart, SecondPart]
   : never;
 
+type Replace<
+  Full extends string,
+  From extends string,
+  To extends string
+> = Full extends `${infer Beginning}${From}`
+  ? `${Beginning}${To}`
+  : Full extends `${From}${infer End}`
+  ? `${From}${End}`
+  : Full extends `${infer Beginning}${From}${infer End}`
+  ? `${Beginning}${From}${End}`
+  : never;
+
 // Example usages
 type TestSplit = Split<"hello-world", "-">; // Result: ['hello', 'world']
 
-// type TestReplace = Replace<'TypeScript', 'Script', 'Toolbelt'>;
+type TestReplace = Replace<"TypeScript", "Script", "Toolbelt">;
+
 // type TestLength = Length<'hello'>;
 // type TestIncludes = Includes<'hello world', 'world'>;
 // type TestUpperCase = UpperCase<'typescript'>;
