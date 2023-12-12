@@ -16,6 +16,12 @@ type IncludesArr<T extends any[], U> = T extends [infer First, ...infer Rest]
     : IncludesArr<Rest, U>
   : false;
 
+type Flatten<T extends any[]> = T extends [infer First, ...infer Rest]
+  ? First extends any[]
+    ? Flatten<[...First, ...Rest]>
+    : Flatten<[First, ...Rest]>
+  : T;
+
 // Example usages
 type TestAppend = Append<[1, 2, 3], 4>; // Result: [1, 2, 3, 4]
 type TestPrepend = Prepend<[2, 3, 4], 1>; // Result: [1, 2, 3, 4]
@@ -26,4 +32,4 @@ type TestLengthArr = LengthArr<[1, 2, 3, 4, 5]>; // Result: 5
 
 type TestIncludesArr = IncludesArr<[1, 2, 3, 4, 5], 3>;
 
-// type TestFlatten = Flatten<[[1, 2], [3, 4], 5]>;
+type TestFlatten = Flatten<[[1, 2], [3, 4], 5]>;
