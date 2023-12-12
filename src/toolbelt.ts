@@ -17,12 +17,15 @@ type Replace<
   ? `${Beginning}${From}${End}`
   : never;
 
+type Length<S extends string> = S["length"];
+
 // Example usages
 type TestSplit = Split<"hello-world", "-">; // Result: ['hello', 'world']
 
 type TestReplace = Replace<"TypeScript", "Script", "Toolbelt">;
 
-// type TestLength = Length<'hello'>;
+type TestLength = Length<"hello">;
+
 // type TestIncludes = Includes<'hello world', 'world'>;
 // type TestUpperCase = UpperCase<'typescript'>;
 // type TestLowerCase = LowerCase<'TYPESCRIPT'>;
