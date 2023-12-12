@@ -15,3 +15,13 @@ const numberArray = [1, 2, 3];
 
 type NumberArrayElement = ElementType<typeof numberArray>;
 const firstElement: NumberArrayElement = numberArray[0];
+
+// parameters type of a function
+type ParametersType<T> = T extends (...args: infer P) => any ? P : never;
+
+function add(a: number, b: number) {
+  return a + b;
+}
+
+type AddFunctionParams = ParametersType<typeof add>;
+const params: AddFunctionParams = [1, 2];
