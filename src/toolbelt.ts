@@ -34,6 +34,11 @@ type LowerCase<S extends string> = S extends `${infer First}${infer Rest}`
   ? `${Lowercase<First>}${LowerCase<Rest>}`
   : S;
 
+type StartsWith<
+  Full extends string,
+  Start extends string
+> = Full extends `${Start}${infer Rest}` ? true : false;
+
 // Example usages
 type TestSplit = Split<"hello-world", "-">; // Result: ['hello', 'world']
 
@@ -47,5 +52,6 @@ type TestUpperCase = UpperCase<"typescript">; // Result: 'TYPESCRIPT'
 
 type TestLowerCase = LowerCase<"TYPESCRIPT">; // Result: 'typescript'
 
-// type TestStartsWith = StartsWith<'hello world', 'hello'>;
+type TestStartsWith = StartsWith<"hello world", "hello">; // Result: true
+
 // type TestEndsWith = EndsWith<'hello world', 'world'>;
