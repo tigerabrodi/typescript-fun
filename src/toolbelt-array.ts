@@ -10,6 +10,12 @@ type Reverse<T extends any[]> = T extends [infer First, ...infer Rest]
 
 type LengthArr<T extends any[]> = T["length"];
 
+type IncludesArr<T extends any[], U> = T extends [infer First, ...infer Rest]
+  ? First extends U
+    ? true
+    : IncludesArr<Rest, U>
+  : false;
+
 // Example usages
 type TestAppend = Append<[1, 2, 3], 4>; // Result: [1, 2, 3, 4]
 type TestPrepend = Prepend<[2, 3, 4], 1>; // Result: [1, 2, 3, 4]
@@ -18,5 +24,6 @@ type TestConcat = Concat<[1, 2], [3, 4]>; // Result: [1, 2, 3, 4]
 type TestReverse = Reverse<[1, 2, 3]>;
 type TestLengthArr = LengthArr<[1, 2, 3, 4, 5]>; // Result: 5
 
-// type TestIncludes = Includes<[1, 2, 3, 4, 5], 3>;
+type TestIncludesArr = IncludesArr<[1, 2, 3, 4, 5], 3>;
+
 // type TestFlatten = Flatten<[[1, 2], [3, 4], 5]>;
