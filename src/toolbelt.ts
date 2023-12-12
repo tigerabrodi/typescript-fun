@@ -39,6 +39,11 @@ type StartsWith<
   Start extends string
 > = Full extends `${Start}${infer Rest}` ? true : false;
 
+type EndsWith<
+  Full extends string,
+  End extends string
+> = Full extends `${infer Start}${End}` ? true : false;
+
 // Example usages
 type TestSplit = Split<"hello-world", "-">; // Result: ['hello', 'world']
 
@@ -54,4 +59,4 @@ type TestLowerCase = LowerCase<"TYPESCRIPT">; // Result: 'typescript'
 
 type TestStartsWith = StartsWith<"hello world", "hello">; // Result: true
 
-// type TestEndsWith = EndsWith<'hello world', 'world'>;
+type TestEndsWith = EndsWith<"hello world", "world">; // Result: true
