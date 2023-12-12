@@ -58,3 +58,11 @@ const myObjectWithPropsAndMethods = {
 
 type ClassMethods = FunctionProperties<typeof myObjectWithPropsAndMethods>;
 const methods: ClassMethods = { myMethod: (x: number) => "test" }; // Result: { myMethod: (x: number) => string }
+
+// ArgumentsToTuple
+type ArgumentsToTuple<T> = T extends (...args: infer P) => any ? [...P] : never;
+
+function exampleFunction(a: number, b: string, c: boolean): void {}
+
+type ExampleFunctionArguments = ArgumentsToTuple<typeof exampleFunction>;
+const argsTuple: ExampleFunctionArguments = [1, "test", true];
